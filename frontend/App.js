@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useFonts, Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold } from '@expo-google-fonts/manrope';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Home, Compass, Smile, Users } from 'lucide-react-native';
 import { theme } from './theme';
+import { supabase } from './lib/supabase';
 
+import LoginScreen from './screens/LoginScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import DailyCheckInScreen from './screens/DailyCheckInScreen';
 import GroupSessionsScreen from './screens/GroupSessionsScreen';
@@ -34,42 +34,49 @@ function HomeTabs() {
       <Tab.Screen 
         name="Wellness" 
         component={DailyCheckInScreen} 
-        options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="emoticon-happy-outline" color={color} size={24} /> }} 
+        options={{ tabBarIcon: ({ color }) => <Smile color={color} /> }} 
       />
       <Tab.Screen 
         name="Sessions" 
         component={GroupSessionsScreen} 
-        options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account-group-outline" color={color} size={24} /> }} 
+        options={{ tabBarIcon: ({ color }) => <Users color={color} /> }} 
       />
       <Tab.Screen 
         name="Explore" 
         component={ChatScreen} 
-        options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="compass-outline" color={color} size={24} /> }} 
+        options={{ tabBarIcon: ({ color }) => <Compass color={color} /> }} 
       />
     </Tab.Navigator>
   );
 }
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    Manrope_400Regular,
-    Manrope_500Medium,
-    Manrope_600SemiBold,
-  });
+  const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!fontsLoaded) {
-    return null;
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setLoading(false);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  if (loading) {
+    return null; // Return a loading spinner here in a real app
   }
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-          <Stack.Screen name="Main" component={DailyCheckInScreen} />
-          <Stack.Screen name="HomeTabs" component={HomeTabs} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={session && session.user ? 'Onboarding' : 'Login'}>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+        <Stack.Screen name="Main" component={DailyCheckInScreen} />
+        <Stack.Screen name="HomeTabs" component={HomeTabs} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

@@ -23,7 +23,7 @@ export default function OnboardingScreen({ navigation }) {
       <View style={styles.buttonContainer}>
         <TouchableOpacity 
           style={styles.languageButton}
-          onPress={() => navigation.navigate('Main')}
+          onPress={() => navigation.navigate('HomeTabs')}
         >
           <View style={styles.languageContent}>
             <View style={styles.iconCircle}>
@@ -35,7 +35,7 @@ export default function OnboardingScreen({ navigation }) {
 
         <TouchableOpacity 
           style={styles.languageButton}
-          onPress={() => navigation.navigate('Main')}
+          onPress={() => navigation.navigate('HomeTabs')}
         >
           <View style={styles.languageContent}>
             <View style={styles.iconCircle}>
