@@ -5,7 +5,7 @@ import { Heart, Users } from 'lucide-react-native';
 import axios from 'axios';
 
 // Ensure you replace with appropriate IP when testing on physical device
-const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api';
+const API_URL = 'https://mann-ki-baat-backend.onrender.com/api';
 
 export default function GroupSessionsScreen({ navigation }) {
   const [sessions, setSessions] = useState([]);

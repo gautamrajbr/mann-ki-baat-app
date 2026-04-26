@@ -4,7 +4,7 @@ import { theme } from '../theme';
 import { ArrowLeft, MoreVertical, PlusCircle, Mic, Send } from 'lucide-react-native';
 import axios from 'axios';
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api';
+const API_URL = 'https://mann-ki-baat-backend.onrender.com/api';
 
 export default function ChatScreen({ navigation }) {
   const [messages, setMessages] = useState([
