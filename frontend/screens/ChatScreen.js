@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from '../theme';
-import { ArrowLeft, MoreVertical, PlusCircle, Mic, Send } from 'lucide-react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
 
 const API_URL = 'https://mann-ki-baat-backend.onrender.com/api';
@@ -40,7 +41,7 @@ export default function ChatScreen({ navigation }) {
       >
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconButton}>
-            <ArrowLeft color={theme.colors.primary} size={24} />
+            <MaterialCommunityIcons name="arrow-left" color={theme.colors.primary} size={24} />
           </TouchableOpacity>
           <View style={styles.headerInfo}>
             <Image 
@@ -53,7 +54,7 @@ export default function ChatScreen({ navigation }) {
             </View>
           </View>
           <TouchableOpacity style={styles.iconButton}>
-            <MoreVertical color={theme.colors.outline} size={24} />
+            <MaterialCommunityIcons name="dots-vertical" color={theme.colors.outline} size={24} />
           </TouchableOpacity>
         </View>
 
@@ -74,7 +75,7 @@ export default function ChatScreen({ navigation }) {
 
         <View style={styles.inputArea}>
           <View style={styles.inputContainer}>
-            <TouchableOpacity><PlusCircle color={theme.colors.outline} size={24} /></TouchableOpacity>
+            <TouchableOpacity><MaterialCommunityIcons name="plus-circle-outline" color={theme.colors.outline} size={24} /></TouchableOpacity>
             <TextInput 
               style={styles.input} 
               placeholder="Type your message..." 
@@ -82,9 +83,9 @@ export default function ChatScreen({ navigation }) {
               value={inputText}
               onChangeText={setInputText}
             />
-            <TouchableOpacity><Mic color={theme.colors.outline} size={24} /></TouchableOpacity>
+            <TouchableOpacity><MaterialCommunityIcons name="microphone-outline" color={theme.colors.outline} size={24} /></TouchableOpacity>
             <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
-              <Send color={theme.colors.onPrimary} size={20} />
+              <MaterialCommunityIcons name="send" color={theme.colors.onPrimary} size={20} />
             </TouchableOpacity>
           </View>
         </View>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from '../theme';
-import { Heart, Users } from 'lucide-react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
 
 // Ensure you replace with appropriate IP when testing on physical device
@@ -17,8 +18,8 @@ export default function GroupSessionsScreen({ navigation }) {
   }, []);
 
   const renderIcon = (iconName) => {
-    if (iconName === 'favorite') return <Heart color={theme.colors.onPrimaryContainer} size={24} />;
-    return <Users color={theme.colors.onSecondaryContainer} size={24} />;
+    if (iconName === 'favorite') return <MaterialCommunityIcons name="heart" color={theme.colors.onPrimaryContainer} size={24} />;
+    return <MaterialCommunityIcons name="account-group" color={theme.colors.onSecondaryContainer} size={24} />;
   };
 
   return (

@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from '../theme';
-import { Heart } from 'lucide-react-native'; // Fallback icon
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function OnboardingScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       {/* Decorative Background Elements simulated */}
       <View style={styles.header}>
-        <Heart color={theme.colors.primary} size={32} />
+        <MaterialCommunityIcons name="heart" color={theme.colors.primary} size={32} />
         <Text style={styles.logoText}>Mann Ki Baat</Text>
       </View>
 
