@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { theme } from '../theme';
-import { Spa } from 'lucide-react-native'; // Fallback icon
+import { Heart } from 'lucide-react-native'; // Fallback icon
 
 export default function OnboardingScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       {/* Decorative Background Elements simulated */}
       <View style={styles.header}>
-        <Spa color={theme.colors.primary} size={32} />
+        <Heart color={theme.colors.primary} size={32} />
         <Text style={styles.logoText}>Mann Ki Baat</Text>
       </View>
 
